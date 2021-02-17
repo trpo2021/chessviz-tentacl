@@ -1,8 +1,14 @@
-target:=main
-all:
-	g++ -o $(target) -Wall -Werror $(target).cpp
-test:
-	./$(target) User
-	./$(target)
-clean:
-	rm $(target).exe $(target)
+CC=g++
+CFLAGS=-c -Wall -Werror
+LDFLAGS=
+SOURCES=main.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=main
+
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
